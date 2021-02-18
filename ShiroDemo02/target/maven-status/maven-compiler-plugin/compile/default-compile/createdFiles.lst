@@ -1,0 +1,12 @@
+com\wql\service\UserServiceImpl.class
+com\wql\matcher\RetryLimitHashedCredentialsMatcher.class
+com\wql\controller\MyController.class
+com\wql\service\UserService.class
+com\wql\ShiroApplication.class
+com\wql\realm\MyRealm2.class
+com\wql\controller\UserController.class
+com\wql\entity\User.class
+com\wql\mapper\UserMapper.class
+com\wql\realm\MyRealm.class
+com\wql\controller\ExpController.class
+com\wql\config\ShiroConfig.class

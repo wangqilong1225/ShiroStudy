@@ -1,0 +1,10 @@
+##配置数据源参数
+spring:
+  datasource:
+    driver-class-name: com.mysql.cj.jdbc.Driver
+    url: jdbc:mysql://localhost:3306/shiro?useUnicode=true&characterEncoding=utf-8&serverTimezone=GMT%2B8&useSSL=false
+    username: root
+    password: 123456
+##设置shiro认证失败以及过滤器中跳转的默认路径
+shiro:
+  loginUrl: /login

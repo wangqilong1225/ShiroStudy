@@ -6,6 +6,7 @@
         <sourceOutputDir name="target/generated-sources/annotations" />
         <sourceTestOutputDir name="target/generated-test-sources/test-annotations" />
         <outputRelativeToContentRoot value="true" />
+        <module name="ShiroDemo03" />
         <module name="ShiroDemo02" />
         <module name="ShiroDemo01" />
       </profile>
@@ -13,6 +14,7 @@
     <bytecodeTargetLevel>
       <module name="ShiroDemo01" target="1.8" />
       <module name="ShiroDemo02" target="1.8" />
+      <module name="ShiroDemo03" target="1.5" />
     </bytecodeTargetLevel>
   </component>
   <component name="JavacSettings">

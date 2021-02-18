@@ -10,6 +10,7 @@ import org.apache.shiro.authz.AuthorizationInfo;
 import org.apache.shiro.authz.SimpleAuthorizationInfo;
 import org.apache.shiro.realm.AuthenticatingRealm;
 import org.apache.shiro.realm.AuthorizingRealm;
+import org.apache.shiro.realm.CachingRealm;
 import org.apache.shiro.subject.PrincipalCollection;
 import org.apache.shiro.util.ByteSource;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -37,9 +38,9 @@ public class MyRealm extends AuthorizingRealm {
         User user = userService.selUserInfoService(uname);
         if (user != null) {
             //效验密码
-            String salt="wql";  //盐
-            ByteSource bs=ByteSource.Util.bytes(salt);
-            AuthenticationInfo info=new SimpleAuthenticationInfo(token.getPrincipal(),user.getPwd(), bs,token.getPrincipal().toString());
+            String salt = "wql";  //盐
+            ByteSource bs = ByteSource.Util.bytes(salt);
+            AuthenticationInfo info = new SimpleAuthenticationInfo(token.getPrincipal(), user.getPwd(), bs, token.getPrincipal().toString());
             return info;
         }
         return null;
@@ -55,14 +56,14 @@ public class MyRealm extends AuthorizingRealm {
     @Override
     protected AuthorizationInfo doGetAuthorizationInfo(PrincipalCollection principalCollection) {
         System.out.println("自定义授权开始...");
-        String uname= (String) principalCollection.getPrimaryPrincipal();
+        String uname = (String) principalCollection.getPrimaryPrincipal();
         // 1.查询当前用户具备的权限信息
-        List<String> list=userService.selPowerInfoService(uname);
+        List<String> list = userService.selPowerInfoService(uname);
         // 查询当前用户的角色信息
-        List<String> list2=userService.selRoleInfoService(uname);
+        List<String> list2 = userService.selRoleInfoService(uname);
 
         // 2.将当前用户具备的权限信息给shiro
-        SimpleAuthorizationInfo simpleAuthorizationInfo=new SimpleAuthorizationInfo();
+        SimpleAuthorizationInfo simpleAuthorizationInfo = new SimpleAuthorizationInfo();
         simpleAuthorizationInfo.addStringPermissions(list);
         simpleAuthorizationInfo.addRoles(list2);
 

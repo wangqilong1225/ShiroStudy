@@ -3,6 +3,7 @@ package com.wql.config;
 import com.wql.realm.MyRealm;
 import com.wql.realm.MyRealm2;
 import org.apache.shiro.authc.credential.HashedCredentialsMatcher;
+import org.apache.shiro.cache.CacheManager;
 import org.apache.shiro.cache.ehcache.EhCacheManager;
 import org.apache.shiro.io.ResourceUtils;
 import org.apache.shiro.spring.web.config.DefaultShiroFilterChainDefinition;
@@ -42,6 +43,13 @@ public class ShiroConfig {
         //加密迭代次数
         matcher.setHashIterations(2);
         myRealm.setCredentialsMatcher(matcher);
+
+        //关闭身份验证缓存
+        myRealm.setAuthenticationCachingEnabled(false);
+        //是否开启权限认证缓存
+        myRealm.setAuthorizationCachingEnabled(true);
+        //缓存策略
+        myRealm.setAuthorizationCacheName("passwordRetryEhcache");
 
         /**********
          //认证策略：多个realm认证组合策略； 认证策略需要放在realm集成前
@@ -120,7 +128,7 @@ public class ShiroConfig {
     public EhCacheManager getEhcacheManager() {
         //1.创建shiro EhCacheManager对象
         EhCacheManager cacheManager = new EhCacheManager();
-        //2.创建EhCache的CacheManager对象
+        //2.创建InputStream对象读取缓存策略
         InputStream is = null;
         try {
             is = ResourceUtils.getInputStreamForPath("classpath:ehcache/ehcache-shiro.xml");
